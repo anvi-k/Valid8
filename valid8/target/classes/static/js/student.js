@@ -1,10 +1,4 @@
-/**
- * student.js — Valid8 Student Dashboard
- * Renders lot cards, populates the jump dropdown, and drives the Leaflet map.
- * All data polled from /api/summary every 5 seconds.
- */
 
-// ── Leaflet map setup (center on Rutgers NB) ──────────────────────────────────
 const map = L.map('mapContainer', {
     center: [40.5028, -74.4490],
     zoom: 14,
@@ -16,11 +10,11 @@ L.tileLayer('https://{s}.tile.openstreetmap.org/{z}/{x}/{y}.png', {
     maxZoom: 19
 }).addTo(map);
 
-// ── State ────────────────────────────────────────────────────────────────────
-const markers = {};       // lotName → Leaflet CircleMarker
-let lotsCache = [];       // last fetched lot data
 
-// ── Color helpers ─────────────────────────────────────────────────────────────
+const markers = {};      
+let lotsCache = [];      
+
+
 function markerHex(color) {
     if (color === 'green')  return '#22c55e';
     if (color === 'yellow') return '#facc15';
@@ -39,7 +33,7 @@ function dotColor(color) {
     return '#ef4444';
 }
 
-// ── Main fetch & render ───────────────────────────────────────────────────────
+
 async function refreshPage() {
     try {
         const res = await fetch('/api/summary');
@@ -55,7 +49,7 @@ async function refreshPage() {
     }
 }
 
-// ── Lot Cards ─────────────────────────────────────────────────────────────────
+
 function renderCards(lots) {
     const grid = document.getElementById('lotGrid');
     if (!lots || lots.length === 0) {
@@ -108,11 +102,11 @@ function renderCards(lots) {
     }).join('');
 }
 
-// ── Dropdown ──────────────────────────────────────────────────────────────────
+
 function updateDropdown(lots) {
     const sel = document.getElementById('lotJumpSelect');
     const current = sel.value;
-    // Rebuild options preserving current selection
+  
     const opts = lots.map(l =>
         `<option value="${escHtml(l.lotName)}" ${l.lotName === current ? 'selected' : ''}>
             ${escHtml(l.lotName)} — ${l.availableNow} available
@@ -121,42 +115,38 @@ function updateDropdown(lots) {
     sel.innerHTML = '<option value="">— Select a Lot —</option>' + opts;
 }
 
-/**
- * Scroll the card for the given lot into view AND open its map popup.
- * Called from both the dropdown change and card click.
- */
+
 function jumpToLot(lotName) {
     if (!lotName) return;
 
-    // Update dropdown selection
+  
     const sel = document.getElementById('lotJumpSelect');
     sel.value = lotName;
 
-    // Scroll to card
     const cardId = 'card-' + lotName.replace(/\s+/g, '-');
     const card = document.getElementById(cardId);
     if (card) {
-        // Highlight briefly
+       
         document.querySelectorAll('.card-bg').forEach(c => c.classList.remove('highlighted-card'));
         card.classList.add('highlighted-card');
         card.scrollIntoView({ behavior: 'smooth', block: 'center' });
         setTimeout(() => card.classList.remove('highlighted-card'), 2000);
     }
 
-    // Open map marker popup
+
     const marker = markers[lotName];
     if (marker) {
         map.setView(marker.getLatLng(), 16, { animate: true });
         marker.openPopup();
     }
 
-    // Scroll to map
+
     setTimeout(() => {
         document.getElementById('mapContainer').scrollIntoView({ behavior: 'smooth', block: 'start' });
     }, 400);
 }
 
-// ── Leaflet Map ───────────────────────────────────────────────────────────────
+
 function buildPopup(lot) {
     const hex = markerHex(lot.availabilityColor);
     return `
@@ -179,7 +169,6 @@ function updateMap(lots) {
         const popup = buildPopup(lot);
         const tooltip = `${lot.lotName} — ${lot.availableNow} spots`;
 
-        // Create a DivIcon that shows the available spots number inside the circle
         const iconHtml = `
             <div style="
                 width:42px;height:42px;border-radius:50%;
@@ -208,14 +197,14 @@ function updateMap(lots) {
     }
 }
 
-// ── Utility ───────────────────────────────────────────────────────────────────
+
 function escHtml(str) {
     return String(str)
         .replace(/&/g, '&amp;').replace(/</g, '&lt;')
         .replace(/>/g, '&gt;').replace(/"/g, '&quot;');
 }
 
-// Also update the key timestamp
+
 const origSetLastUpdated = typeof setLastUpdated === 'function' ? setLastUpdated : null;
 function setLastUpdated() {
     const ts = 'Last updated: ' + new Date().toLocaleString('en-US', {
@@ -228,6 +217,6 @@ function setLastUpdated() {
     if (el2) el2.textContent = ts;
 }
 
-// ── Start ─────────────────────────────────────────────────────────────────────
+
 refreshPage();
 setInterval(refreshPage, 5000);

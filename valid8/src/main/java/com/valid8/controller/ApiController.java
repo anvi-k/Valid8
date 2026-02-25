@@ -10,10 +10,6 @@ import java.time.LocalDateTime;
 import java.time.format.DateTimeFormatter;
 import java.util.*;
 
-/**
- * REST API controller.
- * All endpoints return JSON.
- */
 @RestController
 @RequestMapping("/api")
 public class ApiController {
@@ -24,37 +20,24 @@ public class ApiController {
     private static final DateTimeFormatter DT_FMT =
         DateTimeFormatter.ofPattern("yyyy-MM-dd HH:mm:ss");
 
-    // ------------------------------------------------------------------
-    // GET /api/summary
-    // ------------------------------------------------------------------
 
     @GetMapping("/summary")
     public ResponseEntity<List<LotSummary>> summary() {
         return ResponseEntity.ok(service.getLotSummaries());
     }
 
-    // ------------------------------------------------------------------
-    // GET /api/violations
-    // ------------------------------------------------------------------
 
     @GetMapping("/violations")
     public ResponseEntity<List<ViolationItem>> violations() {
         return ResponseEntity.ok(service.getViolations());
     }
 
-    // ------------------------------------------------------------------
-    // GET /api/unregistered
-    // ------------------------------------------------------------------
-
     @GetMapping("/unregistered")
     public ResponseEntity<List<UnregisteredItem>> unregistered() {
         return ResponseEntity.ok(service.getUnregistered());
     }
 
-    // ------------------------------------------------------------------
-    // POST /api/reload
-    // ------------------------------------------------------------------
-
+   
     @PostMapping("/reload")
     public ResponseEntity<Map<String, Object>> reload() {
         service.reload();

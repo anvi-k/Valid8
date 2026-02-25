@@ -83,16 +83,16 @@
 </head>
 <body class="flex flex-col items-center justify-center min-h-screen px-4">
 
-    <!-- Logo -->
+  
     <div class="mb-10 text-center">
         <div class="text-5xl font-black tracking-widest text-blue-400 logo-glow mb-2">Valid8</div>
         <div class="text-gray-500 text-sm tracking-widest uppercase">Rutgers University Parking System</div>
     </div>
 
-    <!-- Portal selector card -->
+  
     <div class="w-full max-w-md">
 
-        <!-- Tabs -->
+    
         <div class="flex gap-1 mb-0" id="tabs">
             <button class="portal-tab active-student" id="tabStudent" onclick="switchPortal('student')">
                 Student Portal
@@ -102,10 +102,10 @@
             </button>
         </div>
 
-        <!-- Form Panel -->
+    
         <div class="form-panel p-8" style="background: #0a0f1e; border: 1px solid #1d4ed8;">
 
-            <!-- Student Form -->
+            
             <div id="formStudent">
                 <div class="flex items-center gap-3 mb-6">
                     <div class="badge-student rounded-full px-3 py-1 text-xs font-bold text-blue-300 tracking-wide">STUDENT</div>
@@ -129,7 +129,7 @@
                 </div>
             </div>
 
-            <!-- RUPD Form -->
+         
             <div id="formRupd" class="hidden">
                 <div class="flex items-center gap-3 mb-6">
                     <div class="badge-rupd rounded-full px-3 py-1 text-xs font-bold text-blue-300 tracking-wide">RUPD OFFICER</div>
@@ -187,7 +187,7 @@
 
         errEl.classList.add('hidden');
 
-        // Any credentials accepted — just route to the correct portal
+        
         if (portal === 'student') {
             window.location.href = '/student';
         } else {
@@ -195,7 +195,7 @@
         }
     }
 
-    // Allow Enter key to submit
+  
     document.addEventListener('keydown', function(e) {
         if (e.key === 'Enter') doLogin(activePortal);
     });

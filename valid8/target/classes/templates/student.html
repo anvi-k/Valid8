@@ -40,7 +40,7 @@
 </head>
 <body class="text-white min-h-screen">
 
-<!-- Navbar -->
+
 <nav class="nav-bg sticky top-0 z-50">
     <div class="max-w-7xl mx-auto px-4 py-3 flex items-center justify-between flex-wrap gap-3">
         <div class="flex items-center gap-3">
@@ -48,7 +48,7 @@
             <span class="bg-blue-900 text-blue-300 text-xs font-bold px-2 py-0.5 rounded-full">STUDENT</span>
         </div>
         <div class="flex items-center gap-3 flex-wrap">
-            <!-- Lot Quick-Jump Dropdown -->
+            
             <div class="flex items-center gap-2">
                 <span class="text-blue-400 text-xs font-semibold hidden sm:block">Jump to Lot:</span>
                 <select class="lot-select" id="lotJumpSelect" onchange="jumpToLot(this.value)">
@@ -65,18 +65,18 @@
     </div>
 </nav>
 
-<!-- Page Title -->
+
 <div class="max-w-7xl mx-auto px-4 pt-7 pb-3">
     <h1 class="text-2xl font-black text-white">Parking Dashboard</h1>
     <p class="text-blue-900 text-sm mt-0.5">Rutgers University — New Brunswick Campus · Live availability</p>
 </div>
 
-<!-- Error Banner -->
+
 <div id="errorBanner" class="hidden max-w-7xl mx-auto px-4 mb-3">
     <div class="bg-red-950 border border-red-700 text-red-300 px-4 py-2 rounded-lg text-sm"></div>
 </div>
 
-<!-- ===== AVAILABILITY KEY ===== -->
+
 <div class="max-w-7xl mx-auto px-4 mb-5">
     <div class="section-bg rounded-xl px-5 py-3 flex flex-wrap items-center gap-6">
         <span class="text-blue-400 text-xs font-bold uppercase tracking-widest">Availability Key</span>
@@ -96,14 +96,14 @@
     </div>
 </div>
 
-<!-- ===== LOT CARDS GRID ===== -->
+
 <div class="max-w-7xl mx-auto px-4 mb-8">
     <div id="lotGrid" class="grid grid-cols-1 sm:grid-cols-2 lg:grid-cols-3 xl:grid-cols-5 gap-4 scrollable-cards">
         <div class="col-span-full text-center text-blue-900 py-12 text-sm">Loading lots…</div>
     </div>
 </div>
 
-<!-- ===== MAP ===== -->
+
 <div class="max-w-7xl mx-auto px-4 pb-12">
     <div class="section-bg rounded-xl p-5">
         <div class="flex items-center justify-between mb-3 flex-wrap gap-2">
@@ -119,7 +119,7 @@
     </div>
 </div>
 
-<!-- Leaflet + scripts -->
+
 <script src="https://cdnjs.cloudflare.com/ajax/libs/leaflet/1.9.4/leaflet.min.js"></script>
 <script th:src="@{/js/common.js}"></script>
 <script th:src="@{/js/student.js}"></script>

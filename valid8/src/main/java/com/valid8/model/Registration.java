@@ -1,16 +1,11 @@
 package com.valid8.model;
 
-/**
- * Represents a registered vehicle.
- * Ported from Python registration.py.
- *
- * Expected CSV columns: plate, lot, max_hours
- */
+
 public class Registration {
 
     private final String plate;
     private final String lot;
-    private final double maxHours; // maximum allowed parking hours
+    private final double maxHours; 
 
     public Registration(String plate, String lot, double maxHours) {
         this.plate = plate.trim().toUpperCase();

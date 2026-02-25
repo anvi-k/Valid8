@@ -1,7 +1,4 @@
-/**
- * dashboard.js — Valid8 Dashboard page.
- * Fetches /api/summary and renders responsive lot cards every 5 seconds.
- */
+
 
 async function refreshPage() {
     try {
@@ -94,6 +91,6 @@ function escHtml(str) {
         .replace(/>/g, '&gt;');
 }
 
-// Initial load + polling
+
 refreshPage();
 setInterval(refreshPage, 5000);

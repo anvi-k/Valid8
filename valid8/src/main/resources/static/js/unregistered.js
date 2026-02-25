@@ -1,7 +1,4 @@
-/**
- * unregistered.js — Valid8 Unregistered Plates page.
- * Fetches /api/unregistered and renders table rows every 5 seconds.
- */
+
 
 async function refreshPage() {
     try {
@@ -51,6 +48,5 @@ function escHtml(str) {
         .replace(/>/g, '&gt;');
 }
 
-// Initial load + polling
 refreshPage();
 setInterval(refreshPage, 5000);

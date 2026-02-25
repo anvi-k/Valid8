@@ -1,9 +1,5 @@
 package com.valid8.model;
 
-/**
- * JSON response object for /api/unregistered.
- * Includes time in and time out for RUPD display.
- */
 public class UnregisteredItem {
 
     private String licensePlate;

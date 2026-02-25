@@ -13,17 +13,7 @@ import java.nio.file.*;
 import java.time.LocalDateTime;
 import java.util.*;
 
-/**
- * Loads and parses the two CSV files.
- *
- * registered_cars.csv  — columns: plate, lot, max_hours
- * simulation_data.csv  — columns: plate, lot, entry_time, exit_time
- *
- * Files are resolved in this priority order:
- *   1. Absolute path as configured
- *   2. Relative to current working directory
- *   3. From the classpath (src/main/resources)
- */
+
 @Component
 public class CsvDataLoader {
 
@@ -33,14 +23,7 @@ public class CsvDataLoader {
     @Value("${valid8.csv.simulation:simulation_data.csv}")
     private String simulationPath;
 
-    // -----------------------------------------------------------------------
-    // Public load methods
-    // -----------------------------------------------------------------------
-
-    /**
-     * Load all registrations from registered_cars.csv.
-     * Returns map of uppercase plate -> Registration.
-     */
+   
     public Map<String, Registration> loadRegistrations() {
         Map<String, Registration> map = new LinkedHashMap<>();
         List<String[]> rows = readCsv(registrationsPath);
@@ -69,10 +52,7 @@ public class CsvDataLoader {
         return map;
     }
 
-    /**
-     * Load all parking records from simulation_data.csv.
-     * Returns list of ParkingRecord (registration not yet linked).
-     */
+
     public List<ParkingRecord> loadParkingRecords() {
         List<ParkingRecord> list = new ArrayList<>();
         List<String[]> rows = readCsv(simulationPath);
@@ -90,7 +70,7 @@ public class CsvDataLoader {
                 String plate       = cell(row, idx[0]).toUpperCase();
                 String lot         = cell(row, idx[1]);
                 LocalDateTime entry = TimeUtils.parse(cell(row, idx[2]));
-                LocalDateTime exit  = TimeUtils.parse(cell(row, idx[3])); // null if blank
+                LocalDateTime exit  = TimeUtils.parse(cell(row, idx[3])); 
 
                 if (!plate.isBlank() && entry != null) {
                     list.add(new ParkingRecord(plate, lot, entry, exit));
@@ -103,11 +83,7 @@ public class CsvDataLoader {
         return list;
     }
 
-    // -----------------------------------------------------------------------
-    // Column detection (flexible header matching)
-    // -----------------------------------------------------------------------
 
-    /** Returns [plateIdx, lotIdx, maxHoursIdx] or null */
     private int[] detectRegistrationColumns(String[] header) {
         int plateIdx = -1, lotIdx = -1, maxHrsIdx = -1;
         for (int i = 0; i < header.length; i++) {
@@ -120,7 +96,6 @@ public class CsvDataLoader {
         return new int[]{plateIdx, lotIdx, maxHrsIdx};
     }
 
-    /** Returns [plateIdx, lotIdx, entryIdx, exitIdx] or null */
     private int[] detectSimulationColumns(String[] header) {
         int plateIdx = -1, lotIdx = -1, entryIdx = -1, exitIdx = -1;
         for (int i = 0; i < header.length; i++) {
@@ -134,18 +109,14 @@ public class CsvDataLoader {
         return new int[]{plateIdx, lotIdx, entryIdx, exitIdx};
     }
 
-    // -----------------------------------------------------------------------
-    // CSV file reading
-    // -----------------------------------------------------------------------
 
-    /** Read all rows from a CSV file. Returns null on failure. */
     private List<String[]> readCsv(String pathStr) {
-        // Try file system first
+      
         Path fsPath = Paths.get(pathStr);
         if (fsPath.toFile().exists()) {
             return readFromFile(fsPath.toFile());
         }
-        // Try classpath
+  
         try (InputStream is = getClass().getClassLoader().getResourceAsStream(pathStr)) {
             if (is != null) {
                 return readFromStream(is);

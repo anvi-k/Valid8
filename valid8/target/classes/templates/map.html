@@ -5,7 +5,7 @@
     <meta name="viewport" content="width=device-width, initial-scale=1.0"/>
     <title>Valid8 — Map</title>
     <script src="https://cdn.tailwindcss.com"></script>
-    <!-- Leaflet CSS -->
+  
     <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/leaflet/1.9.4/leaflet.min.css"/>
     <link rel="stylesheet" th:href="@{/css/app.css}"/>
     <style>
@@ -14,7 +14,6 @@
 </head>
 <body class="bg-slate-900 text-white min-h-screen">
 
-<!-- Navbar -->
 <nav class="bg-slate-800 border-b border-yellow-400 shadow-lg">
     <div class="max-w-7xl mx-auto px-4 py-3 flex items-center justify-between flex-wrap gap-2">
         <span class="text-yellow-400 text-2xl font-extrabold tracking-wide">Valid8</span>
@@ -27,7 +26,7 @@
     </div>
 </nav>
 
-<!-- Page Header -->
+
 <div class="max-w-7xl mx-auto px-4 pt-8 pb-4 flex flex-wrap items-center justify-between gap-4">
     <div>
         <h1 class="text-3xl font-bold text-white">Live Lot Map</h1>
@@ -42,17 +41,16 @@
     </div>
 </div>
 
-<!-- Error Banner -->
 <div id="errorBanner" class="hidden max-w-7xl mx-auto px-4 mb-4">
     <div class="bg-red-900 border border-red-500 text-red-200 px-4 py-3 rounded-lg text-sm"></div>
 </div>
 
-<!-- Map + Legend -->
+
 <main class="max-w-7xl mx-auto px-4 pb-12">
     <div class="bg-slate-800 rounded-xl shadow-xl p-4">
         <div id="mapContainer"></div>
 
-        <!-- Legend -->
+
         <div class="flex flex-wrap gap-4 mt-4 text-sm">
             <div class="flex items-center gap-2">
                 <span class="w-4 h-4 rounded-full bg-green-500 inline-block"></span>
@@ -73,7 +71,7 @@
     </div>
 </main>
 
-<!-- Leaflet JS -->
+
 <script src="https://cdnjs.cloudflare.com/ajax/libs/leaflet/1.9.4/leaflet.min.js"></script>
 <script th:src="@{/js/common.js}"></script>
 <script th:src="@{/js/map.js}"></script>

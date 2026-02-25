@@ -1,9 +1,4 @@
-/**
- * common.js — Valid8 shared frontend utilities.
- * Included on every page.
- */
 
-/** Update the "Last updated" label */
 function setLastUpdated() {
     const ts = 'Last updated: ' + new Date().toLocaleString('en-US', {
         month: 'short', day: 'numeric', year: 'numeric',
@@ -12,7 +7,7 @@ function setLastUpdated() {
     document.querySelectorAll('#lastUpdated').forEach(el => el.textContent = ts);
 }
 
-/** Show or hide the error banner */
+
 function showError(msg) {
     const banner = document.getElementById('errorBanner');
     if (!banner) return;
@@ -25,10 +20,7 @@ function showError(msg) {
     }
 }
 
-/**
- * Call POST /api/reload then refresh the current page's data.
- * Each page defines a global refreshPage() function.
- */
+
 async function reloadData() {
     try {
         const res = await fetch('/api/reload', { method: 'POST' });

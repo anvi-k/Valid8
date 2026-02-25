@@ -1,33 +1,27 @@
-/**
- * map.js — Valid8 Map page.
- * Uses Leaflet.js to display parking lots on a Rutgers NB campus map.
- * Markers are color-coded and update every 5 seconds without resetting the view.
- */
 
-// Initialize Leaflet map centered on Rutgers New Brunswick
 const map = L.map('mapContainer', {
     center: [40.5028, -74.4490],
     zoom: 14,
     zoomControl: true
 });
 
-// OpenStreetMap tile layer
+
 L.tileLayer('https://{s}.tile.openstreetmap.org/{z}/{x}/{y}.png', {
     attribution: '© <a href="https://www.openstreetmap.org/copyright">OpenStreetMap</a> contributors',
     maxZoom: 19
 }).addTo(map);
 
-// Map from lotName -> Leaflet CircleMarker (so we can update in-place)
+
 const markers = {};
 
-/** Return Leaflet color string based on availabilityColor */
+
 function markerColor(color) {
     if (color === 'green')  return '#22c55e';
     if (color === 'yellow') return '#facc15';
     return '#ef4444';
 }
 
-/** Build popup HTML for a lot summary */
+
 function buildPopup(lot) {
     const occ = (lot.occupancyPercent || 0).toFixed(1);
     return `
@@ -42,7 +36,7 @@ function buildPopup(lot) {
         </div>`;
 }
 
-/** Build tooltip label */
+
 function buildTooltip(lot) {
     return `${lot.lotName} — ${lot.availableNow} available`;
 }
@@ -59,13 +53,13 @@ async function refreshPage() {
             const tooltipText = buildTooltip(lot);
 
             if (markers[lot.lotName]) {
-                // Update existing marker without removing it (preserves map view)
+               
                 const m = markers[lot.lotName];
                 m.setStyle({ color: color, fillColor: color });
                 m.setPopupContent(popupHtml);
                 m.setTooltipContent(tooltipText);
             } else {
-                // Create new marker
+              
                 const m = L.circleMarker([lot.latitude, lot.longitude], {
                     radius: 14,
                     color: color,
@@ -94,6 +88,6 @@ function escHtml(str) {
         .replace(/>/g, '&gt;');
 }
 
-// Initial load + polling
+
 refreshPage();
 setInterval(refreshPage, 5000);

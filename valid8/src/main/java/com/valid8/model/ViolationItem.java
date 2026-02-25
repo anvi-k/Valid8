@@ -1,16 +1,13 @@
 package com.valid8.model;
 
-/**
- * JSON response object for /api/violations (one per violation record).
- * Shows time in and time out instead of duration.
- */
+
 public class ViolationItem {
 
     private String licensePlate;
     private String lotName;
-    private String timeIn;   // formatted entry time
-    private String timeOut;  // formatted exit time, or "Still In Lot"
-    private String status;   // "Still In Lot" or "Left"
+    private String timeIn;   
+    private String timeOut;  
+    private String status;   
 
     public ViolationItem() {}
 

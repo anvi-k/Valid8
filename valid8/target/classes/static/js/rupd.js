@@ -1,8 +1,4 @@
-/**
- * rupd.js — Valid8 RUPD Enforcement Dashboard
- * Single flat list of unregistered vehicles.
- * Columns: #, License Plate, Lot, Time In, Time Out.
- */
+
 
 let allRecords = [];
 

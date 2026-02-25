@@ -1,9 +1,6 @@
 package com.valid8.model;
 
-/**
- * Immutable configuration for a parking lot.
- * Includes demo GPS coordinates for the Leaflet map.
- */
+
 public class LotConfig {
 
     private final String name;

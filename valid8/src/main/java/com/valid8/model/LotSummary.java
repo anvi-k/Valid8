@@ -1,8 +1,6 @@
 package com.valid8.model;
 
-/**
- * JSON response object for /api/summary (one per lot).
- */
+
 public class LotSummary {
 
     private String lotName;
@@ -18,7 +16,7 @@ public class LotSummary {
 
     public LotSummary() {}
 
-    // --- Getters and setters ---
+  
 
     public String getLotName()           { return lotName; }
     public void setLotName(String v)     { this.lotName = v; }
